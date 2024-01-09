@@ -10,22 +10,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       brand: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(32),
+        allowNull: false
       },
       model: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(32),
+        allowNull: false
       },
       manufacturedYear: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.INTEGER
       },
       ramSize: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       processor: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(64)
       },
       screenDiagonal: {
-        type: Sequelize.NUMBER
+        type: Sequelize.REAL
       },
       hasNFC: {
         type: Sequelize.BOOLEAN
