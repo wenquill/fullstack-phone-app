@@ -1,10 +1,14 @@
+const { Op } = require('sequelize');
 const { Phone } = require('./../models');
 
 module.exports.createPhone = async (req, res, next) => {
   const { body } = req;
 
+  console.log('body: ', body);
+
   try {
     const createdPhone = await Phone.create(body);
+    console.log('created phone: ', createdPhone);
 
     if (!createdPhone) {
       return res.status(400).send('Something went wrong...');
@@ -17,19 +21,19 @@ module.exports.createPhone = async (req, res, next) => {
 };
 
 module.exports.getAllPhones = async (req, res, next) => {
-  const queryParams = req.query;
-  const page = queryParams.page || 1;
-  const pageSize = queryParams.pageSize || 10;
+  const queries = req.query;
+  const page = queries.page || 1;
+  const pageSize = queries.pageSize || 10;
 
   const whereConditions = {};
-  for (const key in queryParams) {
+  for (const key in queries) {
     if (
-      queryParams.hasOwnProperty(key) &&
+        queries.hasOwnProperty(key) &&
       key !== 'page' &&
       key !== 'pageSize'
     ) {
       whereConditions[key] = {
-        [Op.eq]: queryParams[key],
+        [Op.eq]: queries[key],
       };
     }
   }
@@ -41,13 +45,68 @@ module.exports.getAllPhones = async (req, res, next) => {
       where: whereConditions,
       limit: parseInt(pageSize),
       offset: parseInt(offset),
+      order: ['manufacturedYear'],
     });
 
-    if (!foundPhones) {
+    if (!foundPhones.length) {
       return res.status(404).send('Phones not found ):');
     }
 
     res.status(200).send(foundPhones);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.updateAllPhones = async (req, res, next) => {
+  const { body } = req;
+  const queries = req.query;
+
+  const whereConditions = {};
+  for (const key in queries) {
+    if (queries.hasOwnProperty(key) && key !== 'page' && key !== 'pageSize') {
+      whereConditions[key] = {
+        [Op.eq]: queries[key],
+      };
+    }
+  }
+
+  try {
+    const updatedPhones = await Phone.update(body, {
+      where: whereConditions,
+      returning: true,
+    });
+
+    if (!updatedPhones[1].length) {
+      return res.status(404).send('Phone not found ):');
+    }
+
+    res.status(200).send(updatedPhones[1]);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.deleteAllPhones = async (req, res, next) => {
+  const queries = req.query;
+
+  const whereConditions = {};
+  for (const key in queries) {
+    if (queries.hasOwnProperty(key)) {
+      whereConditions[key] = {
+        [Op.eq]: queries[key],
+      };
+    }
+  }
+
+  try {
+    const deletedPhone = await Phone.destroy({ where: whereConditions });
+
+    if (!deletedPhone) {
+      return res.status(404).send('Phone not found ):');
+    }
+
+    res.status(204).send();
   } catch (err) {
     next(err);
   }
@@ -62,6 +121,8 @@ module.exports.getPhone = async (req, res, next) => {
     if (!foundPhone) {
       return res.status(404).send('Phone not found ):');
     }
+
+    res.status(200).send(foundPhone);
   } catch (err) {
     next(err);
   }
@@ -73,23 +134,28 @@ module.exports.updatePhone = async (req, res, next) => {
 
   try {
     const updatedPhone = await Phone.update(body, {
-      where: {
-        id: id,
-      },
+      where: { id: id },
+      returning: true,
     });
 
-    res.status(200).send(updatedPhone);
-  } catch (err) {}
+    if (!updatedPhone[1].length) {
+      return res.status(404).send('Phone not found ):');
+    }
+
+    res.status(200).send(updatedPhone[1]);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports.deletePhone = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const deletedPhone = await Phone.destroy(id);
+    const deletedPhone = await Phone.destroy({ where: { id: id } });
 
     if (!deletedPhone) {
-      return res.status(404).send('PHone not found ):');
+      return res.status(404).send('Phone not found ):');
     }
 
     res.status(204).send();

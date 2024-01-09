@@ -6,7 +6,9 @@ const phonesRouter = Router();
 phonesRouter
   .route('/')
   .post(phoneControllers.createPhone)
-  .get(phoneControllers.getAllPhones);
+  .get(phoneControllers.getAllPhones)
+  .patch(phoneControllers.updateAllPhones)
+  .delete(phoneControllers.deleteAllPhones);
 
 phonesRouter
   .route('/:id')

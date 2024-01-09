@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       manufacturedYear: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.INTEGER,
         validate: {
           [Op.between]: [1970, new Date().getFullYear()],
         },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.REAL,
         validate: { [Op.gt]: 0 },
       },
-      hasNFC: {
+      hasNfc: {
         type: DataTypes.BOOLEAN,
       },
     },
