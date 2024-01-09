@@ -15,13 +15,13 @@ GET http://localhost:5000/api/phones
 GET http://localhost:5000/api/phones?brand=IPhone
 
 ### 200
-GET http://localhost:5000/api/phones?brand=IPhone&model=XR
+GET http://localhost:5000/api/phones?brand=IPhone&model=11
 
 ### 404
 GET http://localhost:5000/api/phones?brand=IPhone&model=XS
 
 ### 200
-GET http://localhost:5000/api/phones?brand=IPhone&page=2&pageSize=2
+GET http://localhost:5000/api/phones?brand=IPhone&page=1&pageSize=2
 
 ### 200
 GET http://localhost:5000/api/phones?page=1&pageSize=5
@@ -33,13 +33,13 @@ GET http://localhost:5000/api/phones?page=3&pageSize=2
 GET http://localhost:5000/api/phones?manufacturedYear=2019
 
 ### 200
-GET http://localhost:5000/api/phones/4
+GET http://localhost:5000/api/phones/5
 
 ### 404
 GET http://localhost:5000/api/phones/222
 
 ### оновлення: змінити розмір оперативної пам'яті телефону з id: 3
-PATCH http://localhost:5000/api/phones/2
+PATCH http://localhost:5000/api/phones/3
 Content-Type: application/json
 
 {
@@ -55,9 +55,9 @@ Content-Type: application/json
     "ramSize": 12
 }
 
-### оновлення: додати нфс всім телефонам 2021 року випуску
+### оновлення: додати нфс всім телефонам 2020 року випуску
 
-PATCH http://localhost:5000/api/phones?manufacturedYear=2022
+PATCH http://localhost:5000/api/phones?manufacturedYear=2020
 Content-Type: application/json
 
 {
@@ -68,6 +68,6 @@ Content-Type: application/json
 
 DELETE http://localhost:5000/api/phones/2
 
-### видалення телефонів 2020 року випуску
+### видалення телефонів 2016 року випуску
 
-DELETE http://localhost:5000/api/phones?manufacturedYear=2020
+DELETE http://localhost:5000/api/phones?manufacturedYear=2016
