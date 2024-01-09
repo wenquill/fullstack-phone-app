@@ -2,13 +2,7 @@
 const { Model, Op } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Phone extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate (models) {
-      // define association here
     }
   }
   Phone.init(
@@ -32,8 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: { [Op.gt]: 0 },
       },
       processor: {
-        type: DataTypes.STRING,
-        validate: { [Op.gt]: 0 },
+        type: DataTypes.STRING(64),
       },
       screenDiagonal: {
         type: DataTypes.REAL,
