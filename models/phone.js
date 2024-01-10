@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       ramSize: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.SMALLINT,
         validate: { [Op.gt]: 0 },
       },
       processor: {

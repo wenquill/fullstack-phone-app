@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       ram_size: {
-        type: Sequelize.INTEGER
+        type: Sequelize.SMALLINT
       },
       processor: {
         type: Sequelize.STRING(64)
