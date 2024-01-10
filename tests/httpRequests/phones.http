@@ -5,7 +5,10 @@ Content-Type: application/json
 {
     "brand": "Samsung",
     "model": "Galaxy A23",
-    "manufacturedYear": 2018
+    "manufacturedYear": 2018,
+    "ramSize": 6,
+    "screenDiagonal": 6.3,
+    "hasNfc": "true"
 }
 
 ### 200
@@ -21,7 +24,7 @@ GET http://localhost:5000/api/phones?brand=IPhone&model=11
 GET http://localhost:5000/api/phones?brand=IPhone&model=XS
 
 ### 200
-GET http://localhost:5000/api/phones?brand=IPhone&page=1&pageSize=2
+GET http://localhost:5000/api/phones?brand=IPhone&page=2&pageSize=2
 
 ### 200
 GET http://localhost:5000/api/phones?page=1&pageSize=5
