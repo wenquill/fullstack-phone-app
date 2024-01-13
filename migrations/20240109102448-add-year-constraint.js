@@ -11,7 +11,10 @@ module.exports = {
       type: 'check',
       where: {
         manufactured_year: {
-          [Op.between]: [1970, new Date().getFullYear()],
+          [Op.between]: [
+            1970,
+            Sequelize.literal('EXTRACT (year FROM CURRENT_DATE)'),
+          ],
         },
       },
     });

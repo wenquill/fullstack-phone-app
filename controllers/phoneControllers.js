@@ -22,30 +22,22 @@ module.exports.createPhone = async (req, res, next) => {
 
 module.exports.getAllPhones = async (req, res, next) => {
   const queries = req.query;
-  const page = queries.page || 1;
-  const pageSize = queries.pageSize || 10;
+  const { pagination } = req;
 
   const whereConditions = {};
-  for (const key in queries) {
-    if (
-        queries.hasOwnProperty(key) &&
-      key !== 'page' &&
-      key !== 'pageSize'
-    ) {
+  Object.keys(queries)
+    .filter(key => key !== 'page' && key !== 'pageSize')
+    .forEach(key => {
       whereConditions[key] = {
         [Op.eq]: queries[key],
       };
-    }
-  }
-
-  const offset = (page - 1) * pageSize;
+    });
 
   try {
     const foundPhones = await Phone.findAll({
       where: whereConditions,
-      limit: parseInt(pageSize),
-      offset: parseInt(offset),
       order: ['manufacturedYear'],
+      ...pagination,
     });
 
     if (!foundPhones.length) {
