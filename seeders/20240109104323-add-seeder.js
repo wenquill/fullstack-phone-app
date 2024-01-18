@@ -12,7 +12,7 @@ module.exports = {
           manufactured_year: 2016,
           ram_size: 3,
           screen_diagonal: 6.06,
-          processor: 'Apple A12 Bionic',
+          processor_id: 1,
           has_nfc: true,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
