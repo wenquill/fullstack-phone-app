@@ -14,14 +14,41 @@ GET http://localhost:5000/api/processors/5/phones
 GET http://localhost:5000/api/processors/235/phones
 
 ### 201
-POST http://localhost:5000/api/processors/2/phones
+POST http://localhost:5000/api/processors/4/phones
 Content-Type: application/json
 
 {
     "brand": "IPhone",
-    "model": "XS",
-    "manufacturedYear": 2019,
-    "ramSize": 6,
-    "screenDiagonal": 6.1,
+    "model": "6",
+    "manufacturedYear": 2010,
+    "ramSize": 4,
+    "screenDiagonal": 6,
     "hasNfc": true
 }
+
+### 201
+POST http://localhost:5000/api/processors
+Content-Type: application/json
+
+{
+    "name": "Apple A17 Bionic"
+}
+
+### 200
+GET http://localhost:5000/api/processors/2
+
+### 200
+PATCH http://localhost:5000/api/processors/2
+Content-Type: application/json
+
+{
+    "name": "Apple A13 Bioooonic"
+}
+
+
+### 204
+DELETE http://localhost:5000/api/processors/9
+
+
+### 404
+DELETE http://localhost:5000/api/processors/9111
