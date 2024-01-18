@@ -4,8 +4,6 @@ const { Phone } = require('./../models');
 module.exports.createPhone = async (req, res, next) => {
   const { body } = req;
 
-  console.log('body: ', body);
-
   try {
     const createdPhone = await Phone.create(body);
     console.log('created phone: ', createdPhone);

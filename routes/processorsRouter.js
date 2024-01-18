@@ -5,6 +5,11 @@ const processorsRouter = Router();
 
 processorsRouter.get('/', processorControllers.getAllProcessors);
 
-processorsRouter.get('/:id', processorControllers.getProcessor)
+processorsRouter.get('/:id', processorControllers.getProcessor);
+
+processorsRouter
+  .route('/:id/phones')
+  .get(processorControllers.getProcessorPhones)
+  .post(processorControllers.createProcessorPhone);
 
 module.exports = processorsRouter;

@@ -6,3 +6,22 @@ GET http://localhost:5000/api/processors/1
 
 ### 404
 GET http://localhost:5000/api/processors/22
+
+### 200
+GET http://localhost:5000/api/processors/5/phones
+
+### 404
+GET http://localhost:5000/api/processors/235/phones
+
+### 201
+POST http://localhost:5000/api/processors/2/phones
+Content-Type: application/json
+
+{
+    "brand": "IPhone",
+    "model": "XS",
+    "manufacturedYear": 2019,
+    "ramSize": 6,
+    "screenDiagonal": 6.1,
+    "hasNfc": true
+}
