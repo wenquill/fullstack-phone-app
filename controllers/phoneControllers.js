@@ -64,16 +64,17 @@ module.exports.updateAllPhones = async (req, res, next) => {
   }
 
   try {
-    const updatedPhones = await Phone.update(body, {
+    const [updatedPhonesCount, updatedPhones] = await Phone.update(body, {
       where: whereConditions,
+      raw: true,
       returning: true,
     });
 
-    if (!updatedPhones[1].length) {
+    if (!updatedPhonesCount) {
       return res.status(404).send('Phone not found ):');
     }
 
-    res.status(200).send(updatedPhones[1]);
+    res.status(200).send(updatedPhones);
   } catch (err) {
     next(err);
   }

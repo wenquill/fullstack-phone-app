@@ -3,6 +3,9 @@ const { Model, Op } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Phone extends Model {
     static associate (models) {
+      Phone.belongsTo(models.Processor, {
+        foreignKey: 'processorId',
+      });
     }
   }
   Phone.init(
@@ -24,9 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       ramSize: {
         type: DataTypes.SMALLINT,
         validate: { [Op.gt]: 0 },
-      },
-      processor: {
-        type: DataTypes.STRING(64),
       },
       screenDiagonal: {
         type: DataTypes.REAL,
