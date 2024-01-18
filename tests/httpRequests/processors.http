@@ -1,0 +1,8 @@
+### 200
+GET http://localhost:5000/api/processors
+
+### 200
+GET http://localhost:5000/api/processors/1
+
+### 404
+GET http://localhost:5000/api/processors/22
