@@ -6,6 +6,9 @@ function Header () {
       <nav>
         <ul>
           <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
             <Link to='/phones'>Phones</Link>
           </li>
           <li>
