@@ -1,0 +1,76 @@
+### додавання нового телефону
+POST http://localhost:5000/api/phones
+Content-Type: application/json
+
+{
+    "brand": "Samsung",
+    "model": "Galaxy A23",
+    "manufacturedYear": 2018,
+    "ramSize": 6,
+    "screenDiagonal": 6.3,
+    "hasNfc": "true"
+}
+
+### 200
+GET http://localhost:5000/api/phones
+
+### 200
+GET http://localhost:5000/api/phones?brand=IPhone
+
+### 200
+GET http://localhost:5000/api/phones?brand=IPhone&model=11
+
+### 404
+GET http://localhost:5000/api/phones?brand=IPhone&model=XS
+
+### 200
+GET http://localhost:5000/api/phones?brand=IPhone&page=2&pageSize=2
+
+### 200
+GET http://localhost:5000/api/phones?page=1&pageSize=5
+
+### отримання списку телефонів (* 3-я сторінка при перегляді по 2 телефони на сторінці, упорядкованих за роком виробництва)
+GET http://localhost:5000/api/phones?page=3&pageSize=2
+
+### отримання списку телефонів певного року видання
+GET http://localhost:5000/api/phones?manufacturedYear=2019
+
+### 200
+GET http://localhost:5000/api/phones/5
+
+### 404
+GET http://localhost:5000/api/phones/222
+
+### оновлення: змінити розмір оперативної пам'яті телефону з id: 3
+PATCH http://localhost:5000/api/phones/3
+Content-Type: application/json
+
+{
+    "ramSize": 12
+}
+
+### 404
+
+PATCH http://localhost:5000/api/phones/22
+Content-Type: application/json
+
+{
+    "ramSize": 12
+}
+
+### оновлення: додати нфс всім телефонам 2020 року випуску
+
+PATCH http://localhost:5000/api/phones?manufacturedYear=2020
+Content-Type: application/json
+
+{
+    "hasNfc": true
+}
+
+### видалення телефону з id: 2
+
+DELETE http://localhost:5000/api/phones/2
+
+### видалення телефонів 2016 року випуску
+
+DELETE http://localhost:5000/api/phones?manufacturedYear=2016
