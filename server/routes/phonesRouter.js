@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { phoneControllers } = require('./../controllers');
-const { pagination } = require('./../middlewares');
+const { pagination } = require('../middlewares');
 
 const phonesRouter = Router();
 

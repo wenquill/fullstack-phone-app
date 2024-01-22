@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Phone } = require('./../models');
+const { Phone } = require('../db/models');
 
 module.exports.createPhone = async (req, res, next) => {
   const { body } = req;

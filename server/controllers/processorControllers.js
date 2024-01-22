@@ -1,6 +1,6 @@
 const createHttpError = require('http-errors');
 const _ = require('lodash');
-const { Processor } = require('./../models');
+const { Processor } = require('../db/models');
 
 module.exports.createProcessor = async (req, res, next) => {
   const { body } = req;
