@@ -1,0 +1,32 @@
+@import './../../index.scss';
+
+.linksList {
+  display: flex;
+  gap: $def-gap;
+}
+
+.header {
+  padding: 20px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  gap: $def-gap;
+  align-items: center;
+}
+
+.imageContainer {
+  width: 60px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

@@ -6,28 +6,32 @@ import ProcessorsPage from './pages/ProcessorsPage';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App () {
   return (
     <Router className='App'>
-      <Header/>
-      <Switch>
-        <Route path='/form'>
-          <FormPage />
-        </Route>
-        <Route path='/phones'>
-          <PhonesPage />
-        </Route>
-        <Route path='/processors'>
-          <ProcessorsPage />
-        </Route>
-        <Route path='/' exact>
-          <HomePage />
-        </Route>
-        <Route path='/*'>
-          <NotFound />
-        </Route>
-      </Switch>
+      <Header />
+      <main>
+        <Switch>
+          <Route path='/form'>
+            <FormPage />
+          </Route>
+          <Route path='/phones'>
+            <PhonesPage />
+          </Route>
+          <Route path='/processors'>
+            <ProcessorsPage />
+          </Route>
+          <Route path='/' exact>
+            <HomePage />
+          </Route>
+          <Route path='/*'>
+            <NotFound />
+          </Route>
+        </Switch>
+      </main>
+      <Footer />
     </Router>
   );
 }

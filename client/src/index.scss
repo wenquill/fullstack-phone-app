@@ -11,8 +11,24 @@ html {
   font-family: Sen, sans-serif;
 }
 
+$dark-mode: #1a1a1a;
+$light-mode: #eeeeee;
+$main: #ffb547;
+
+$def-gap: 20px;
+
 body {
+  background-color: $dark-mode;
+  color: $light-mode;
+}
+
+#root {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1360px;
+  margin: 0 auto;
 }
 
 a {
@@ -25,4 +41,8 @@ button {
   border: none;
   font-family: inherit;
   font-size: inherit;
+}
+
+ul {
+  list-style-type: none;
 }
