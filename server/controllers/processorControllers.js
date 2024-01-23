@@ -20,7 +20,7 @@ module.exports.createProcessor = async (req, res, next) => {
       'updatedAt',
     ]);
 
-    res.status(201).send({ data: preparedProcessor });
+    res.status(201).send(preparedProcessor);
   } catch (err) {
     next(err);
   }
@@ -35,7 +35,7 @@ module.exports.getAllProcessors = async (req, res, next) => {
       },
     });
 
-    res.status(200).send({ data: foundProcessors });
+    res.status(200).send(foundProcessors);
   } catch (err) {
     next(err);
   }
@@ -56,7 +56,7 @@ module.exports.getProcessor = async (req, res, next) => {
       return next(createHttpError(404, 'Processor not found'));
     }
 
-    res.status(200).send({ data: foundProcessor });
+    res.status(200).send(foundProcessor);
   } catch (err) {
     next(err);
   }
@@ -87,7 +87,7 @@ module.exports.updateProcessor = async (req, res, next) => {
       'updatedAt',
     ]);
 
-    res.status(200).send({ data: preparedProcessor });
+    res.status(200).send(preparedProcessor);
   } catch (err) {
     next(err);
   }
@@ -126,7 +126,7 @@ module.exports.getProcessorPhones = async (req, res, next) => {
       },
     });
 
-    res.status(200).send({ data: foundPhones });
+    res.status(200).send(foundPhones);
   } catch (err) {
     next(err);
   }
@@ -143,10 +143,7 @@ module.exports.createProcessorPhone = async (req, res, next) => {
       return next(createHttpError(404, 'Processor not found'));
     }
 
-    const createdPhone = await foundProcessor.createPhone({
-      ...body,
-      processorId: id,
-    });
+    const createdPhone = await foundProcessor.createPhone(body);
 
     if (!createdPhone) {
       return next(createHttpError(400, 'Something went wrong...'));
@@ -157,7 +154,7 @@ module.exports.createProcessorPhone = async (req, res, next) => {
       'updatedAt',
     ]);
 
-    res.status(201).send({ data: preparedPhone });
+    res.status(201).send(preparedPhone);
   } catch (err) {
     next(err);
   }

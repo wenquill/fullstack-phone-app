@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
-const { Phone } = require('../db/models');
+const { Phone, Processor } = require('../db/models');
+const createHttpError = require('http-errors');
 
 module.exports.createPhone = async (req, res, next) => {
   const { body } = req;
@@ -35,6 +36,11 @@ module.exports.getAllPhones = async (req, res, next) => {
     const foundPhones = await Phone.findAll({
       where: whereConditions,
       order: ['manufacturedYear'],
+      include: {
+        model: Processor,
+        attributes: ['name'],
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt', 'processorId'] },
       ...pagination,
     });
 
