@@ -35,6 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       hasNfc: {
         type: DataTypes.BOOLEAN,
       },
+      image: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
