@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const { phoneControllers } = require('./../controllers');
-const { pagination } = require('../middlewares');
+const { pagination, upload } = require('../middlewares');
 
 const phonesRouter = Router();
 
 phonesRouter
   .route('/')
-  .post(phoneControllers.createPhone)
+  .post(upload.uploadPhoto, phoneControllers.createPhone)
   .get(pagination.paginatePhones, phoneControllers.getAllPhones)
   .patch(phoneControllers.updateAllPhones)
   .delete(phoneControllers.deleteAllPhones);

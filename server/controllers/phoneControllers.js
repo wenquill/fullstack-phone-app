@@ -3,14 +3,18 @@ const { Phone, Processor } = require('../db/models');
 const createHttpError = require('http-errors');
 
 module.exports.createPhone = async (req, res, next) => {
-  const { body } = req;
+  const { body, file } = req;
 
   try {
+    if (file) {
+      body.image = file.filename;
+    }
+
     const createdPhone = await Phone.create(body);
     console.log('created phone: ', createdPhone);
 
     if (!createdPhone) {
-      return res.status(400).send('Something went wrong...');
+      return next(createHttpError(404, 'Something went wrong...'));
     }
 
     res.status(201).send(createdPhone);
@@ -45,7 +49,7 @@ module.exports.getAllPhones = async (req, res, next) => {
     });
 
     if (!foundPhones.length) {
-      return res.status(404).send('Phones not found ):');
+      return next(createHttpError(404, 'Phones not found ):'));
     }
 
     res.status(200).send(foundPhones);
@@ -75,7 +79,7 @@ module.exports.updateAllPhones = async (req, res, next) => {
     });
 
     if (!updatedPhonesCount) {
-      return res.status(404).send('Phone not found ):');
+      return next(createHttpError(404, 'Phones not found ):'));
     }
 
     res.status(200).send(updatedPhones);
@@ -100,7 +104,7 @@ module.exports.deleteAllPhones = async (req, res, next) => {
     const deletedPhone = await Phone.destroy({ where: whereConditions });
 
     if (!deletedPhone) {
-      return res.status(404).send('Phone not found ):');
+      return next(createHttpError(404, 'Phones not found ):'));
     }
 
     res.status(204).send();
@@ -116,7 +120,7 @@ module.exports.getPhone = async (req, res, next) => {
     const foundPhone = await Phone.findByPk(id);
 
     if (!foundPhone) {
-      return res.status(404).send('Phone not found ):');
+      return next(createHttpError(404, 'Phone not found ):'));
     }
 
     res.status(200).send(foundPhone);
@@ -136,7 +140,7 @@ module.exports.updatePhone = async (req, res, next) => {
     });
 
     if (!updatedPhone[1].length) {
-      return res.status(404).send('Phone not found ):');
+      return next(createHttpError(404, 'Phone not found ):'));
     }
 
     res.status(200).send(updatedPhone[1]);
@@ -152,7 +156,7 @@ module.exports.deletePhone = async (req, res, next) => {
     const deletedPhone = await Phone.destroy({ where: { id: id } });
 
     if (!deletedPhone) {
-      return res.status(404).send('Phone not found ):');
+      return next(createHttpError(404, 'Phone not found ):'));
     }
 
     res.status(204).send();
