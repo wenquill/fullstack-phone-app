@@ -40,6 +40,7 @@ const phonesSlice = createSlice({
       state.isFetching = false;
       state.error = payload;
     });
+
   },
 });
 
