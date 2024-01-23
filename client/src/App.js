@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Processor from './pages/Processor';
 
 function App () {
   return (
@@ -20,8 +21,11 @@ function App () {
           <Route path='/phones'>
             <PhonesPage />
           </Route>
-          <Route path='/processors'>
+          <Route path='/processors' exact>
             <ProcessorsPage />
+          </Route>
+          <Route path='/processors/:id'>
+            <Processor />
           </Route>
           <Route path='/' exact>
             <HomePage />

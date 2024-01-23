@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { connect } from 'react-redux';
 import ProcessorCard from './ProcessorCard';
@@ -16,7 +17,11 @@ function ProcessorsList ({ processors, isFetching, error, getProcessors }) {
       <h2>Processors List</h2>
       <ul>
         {processors.map(processor => (
-          <ProcessorCard key={processor.id} processor={processor} />
+          <li key={processor.id}>
+            <Link to={`/processors/${processor.id}`}>
+              <ProcessorCard processor={processor} />
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
