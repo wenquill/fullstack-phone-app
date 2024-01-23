@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import styles from './../PhonesList.module.scss';
 
 function PhoneCard ({ phone }) {
   const { id, brand, model, screenDiagonal, Processor, processorId } = phone;
@@ -6,10 +7,14 @@ function PhoneCard ({ phone }) {
   return (
     <article>
       <Link to={`/phones/${id}`}>
-        <div>{`${brand} ${model}`}</div>
-        <p>{screenDiagonal}</p>
+        <h2>{`${brand} ${model}`}</h2>
+        <p>
+          <strong>Screen diagonal</strong>: {screenDiagonal}
+        </p>
       </Link>
-      <Link to={`/processors/${processorId}`}>{Processor.name}</Link>
+      <Link to={`/processors/${processorId}`}>
+        <strong>Processor</strong>: {Processor.name}
+      </Link>
     </article>
   );
 }

@@ -3,6 +3,7 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import { connect } from 'react-redux';
 import { getPhonesThunk } from '../../store/slices/phonesSlice';
 import PhoneCard from './PhoneCard';
+import styles from './PhonesList.module.scss';
 
 function PhonesList ({ phones, isFetching, error, getPhones }) {
   useEffect(() => {
@@ -13,11 +14,11 @@ function PhonesList ({ phones, isFetching, error, getPhones }) {
     <div>
       <BeatLoader loading={isFetching} />
       {error && <div>error</div>}
-      <h2>Phones List</h2>
-      <ul>
+      <h1 className={styles.title}>Available phones</h1>
+      <ul className={styles.list}>
         {Array.isArray(phones) &&
           phones.map(phone => (
-            <li key={phone.id}>
+            <li key={phone.id} className={styles.card}>
               <PhoneCard phone={phone} />
             </li>
           ))}
