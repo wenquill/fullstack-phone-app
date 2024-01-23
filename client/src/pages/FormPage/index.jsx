@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
+import PhoneForm from '../../components/form/PhoneForm';
 
-function FormPage() {
-  return (
-    <div>FormPage</div>
-  )
+function FormPage () {
+  return <PhoneForm />;
 }
 
-export default FormPage
+export default FormPage;
