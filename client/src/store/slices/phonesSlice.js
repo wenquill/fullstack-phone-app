@@ -21,6 +21,18 @@ export const getPhonesThunk = createAsyncThunk(
   }
 );
 
+export const getPhoneByIdThunk = createAsyncThunk(
+  `${PHONES_SLICE_NAME}/get/id`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.getPhoneById(payload);
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 const phonesSlice = createSlice({
   name: PHONES_SLICE_NAME,
   initialState,
@@ -38,9 +50,24 @@ const phonesSlice = createSlice({
 
     builder.addCase(getPhonesThunk.rejected, (state, { payload }) => {
       state.isFetching = false;
-      state.error = payload;
+      state.error = payload.errors;
     });
 
+    // get phone by id
+    builder.addCase(getPhoneByIdThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(getPhoneByIdThunk.fulfilled, (state, { payload }) => {
+      state.phones = payload;
+      state.isFetching = false;
+    });
+
+    builder.addCase(getPhoneByIdThunk.rejected, (state, { payload }) => {
+      state.isFetching = false;
+      state.error = payload.errors;
+    });
   },
 });
 

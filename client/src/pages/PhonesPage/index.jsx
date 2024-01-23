@@ -1,13 +1,12 @@
-import React from 'react'
-import PhonesList from '../../components/PhonesList'
+import PhonesList from '../../components/PhonesList';
 
-function PhonesPage() {
+function PhonesPage () {
   return (
     <div>
       <h1>PhonesPage</h1>
-      <PhonesList/>
+      <PhonesList />
     </div>
-  )
+  );
 }
 
-export default PhonesPage
+export default PhonesPage;

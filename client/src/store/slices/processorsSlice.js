@@ -21,11 +21,23 @@ export const getProcessorsThunk = createAsyncThunk(
   }
 );
 
+export const getProcessorByIdThunk = createAsyncThunk(
+  `${PROCESSORS_SLICE_NAME}/get/id`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.getProcessorById(payload);
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 const processorsSlice = createSlice({
   name: PROCESSORS_SLICE_NAME,
   initialState,
   extraReducers: builder => {
-    // get phones
+    // get processors
     builder.addCase(getProcessorsThunk.pending, state => {
       state.isFetching = true;
       state.error = null;
@@ -38,7 +50,23 @@ const processorsSlice = createSlice({
 
     builder.addCase(getProcessorsThunk.rejected, (state, { payload }) => {
       state.isFetching = false;
-      state.error = payload;
+      state.error = payload.errors;
+    });
+
+     // get processor by id
+     builder.addCase(getProcessorByIdThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(getProcessorByIdThunk.fulfilled, (state, { payload }) => {
+      state.processors = payload;
+      state.isFetching = false;
+    });
+
+    builder.addCase(getProcessorByIdThunk.rejected, (state, { payload }) => {
+      state.isFetching = false;
+      state.error = payload.errors;
     });
   },
 });

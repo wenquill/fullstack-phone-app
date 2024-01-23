@@ -8,8 +8,8 @@ function PhoneCard ({ phone }) {
       <Link to={`/phones/${id}`}>
         <div>{`${brand} ${model}`}</div>
         <p>{screenDiagonal}</p>
-        <Link to={`/processors/${processorId}`}>{Processor.name}</Link>
       </Link>
+      <Link to={`/processors/${processorId}`}>{Processor.name}</Link>
     </article>
   );
 }

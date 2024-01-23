@@ -1,8 +1,33 @@
 import { useParams } from 'react-router-dom';
+import BeatLoader from 'react-spinners/BeatLoader';
+import { connect } from 'react-redux';
+import { getPhoneByIdThunk } from '../../../store/slices/phonesSlice';
+import { useEffect } from 'react';
 
-function PhonePage () {
+function PhonePage ({ phones, isFetching, error, getPhone }) {
   const { id } = useParams();
-  return <div>Phone {id}</div>;
+
+  useEffect(() => {
+    getPhone(id);
+  }, []);
+
+  return (
+    <article>
+      <BeatLoader loading={isFetching} />
+      {error & <div>ERROR</div>}
+      {phones && (
+        <div>
+          Phone {phones.brand} {phones.model}
+        </div>
+      )}
+    </article>
+  );
 }
 
-export default PhonePage;
+const mapStateToProps = ({ phonesData }) => phonesData;
+
+const mapDispatchToProps = dispatch => ({
+  getPhone: id => dispatch(getPhoneByIdThunk(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhonePage);

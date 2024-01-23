@@ -1,11 +1,13 @@
-import React from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function ProcessorCard ({ processor }) {
-  const { name } = processor;
+  const { name, id } = processor;
 
   return (
     <article>
-      <div>{`Processor: ${name}`}</div>
+      <Link to={`/processors/${id}`}>
+        <div>{`${name}`}</div>
+      </Link>
     </article>
   );
 }

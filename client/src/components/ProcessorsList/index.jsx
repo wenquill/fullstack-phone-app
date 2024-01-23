@@ -16,13 +16,15 @@ function ProcessorsList ({ processors, isFetching, error, getProcessors }) {
       {error && <div>error</div>}
       <h2>Processors List</h2>
       <ul>
-        {processors.map(processor => (
-          <li key={processor.id}>
-            <Link to={`/processors/${processor.id}`}>
+        {Array.isArray(processors) ? (
+          processors.map(processor => (
+            <li key={processor.id}>
               <ProcessorCard processor={processor} />
-            </Link>
-          </li>
-        ))}
+            </li>
+          ))
+        ) : (
+          <div>No processors available</div>
+        )}
       </ul>
     </div>
   );

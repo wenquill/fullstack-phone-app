@@ -7,7 +7,6 @@ import PhoneCard from './PhoneCard';
 function PhonesList ({ phones, isFetching, error, getPhones }) {
   useEffect(() => {
     getPhones();
-
   }, []);
 
   return (
@@ -16,11 +15,12 @@ function PhonesList ({ phones, isFetching, error, getPhones }) {
       {error && <div>error</div>}
       <h2>Phones List</h2>
       <ul>
-        {phones.map(phone => (
-          <li key={phone.id}>
-            <PhoneCard phone={phone} />
-          </li>
-        ))}
+        {Array.isArray(phones) &&
+          phones.map(phone => (
+            <li key={phone.id}>
+              <PhoneCard phone={phone} />
+            </li>
+          ))}
       </ul>
     </div>
   );
