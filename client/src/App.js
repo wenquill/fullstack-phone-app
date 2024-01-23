@@ -7,7 +7,8 @@ import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Processor from './pages/Processor';
+import ProcessorPage from './pages/ProcessorsPage/ProcessorPage';
+import PhonePage from './pages/PhonesPage/PhonePage';
 
 function App () {
   return (
@@ -18,14 +19,17 @@ function App () {
           <Route path='/form'>
             <FormPage />
           </Route>
-          <Route path='/phones'>
+          <Route path='/phones' exact>
             <PhonesPage />
+          </Route>
+          <Route path='/phones/:id'>
+            <PhonePage />
           </Route>
           <Route path='/processors' exact>
             <ProcessorsPage />
           </Route>
           <Route path='/processors/:id'>
-            <Processor />
+            <ProcessorPage />
           </Route>
           <Route path='/' exact>
             <HomePage />
