@@ -16,7 +16,7 @@ function PhonesList ({ phones, isFetching, error, getPhones }) {
       <h2>Phones List</h2>
       <ul>
         {phones.map(phone => (
-          <PhoneCard phone={phone} />
+          <PhoneCard key={phone.id} phone={phone} />
         ))}
       </ul>
     </div>

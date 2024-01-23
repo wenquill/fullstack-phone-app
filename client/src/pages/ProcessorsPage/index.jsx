@@ -1,8 +1,11 @@
-import React from 'react'
+import ProcessorsList from "../../components/ProcessorsList"
 
 function ProcessorsPage() {
   return (
-    <div>ProcessorsPage</div>
+    <div>
+      <h1>ProcessorsPage</h1>
+      <ProcessorsList/>
+    </div>
   )
 }
 
