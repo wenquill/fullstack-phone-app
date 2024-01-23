@@ -164,3 +164,30 @@ module.exports.deletePhone = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.updatePhoneImage = async (req, res, next) => {
+  const {
+    file,
+    params: { id },
+  } = req;
+
+  try {
+    if (!file) {
+      return next(createHttpError(422, 'Image is required'));
+    }
+    const [updatedPhoneCount, [updatedPhone]] = await Phone.update(
+      { image: file.filename },
+      { where: { id }, raw: true, returning: true }
+    );
+
+    if (!updatedPhoneCount) {
+      return next(createHttpError(404, 'Phone not found ):'));
+    }
+
+    const preparedPhone = _.omit(updatedPhone, ['createdAt', 'updatedAt']);
+
+    res.status(200).send(preparedPhone);
+  } catch (err) {
+    next(err);
+  }
+};

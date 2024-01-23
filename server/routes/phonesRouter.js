@@ -17,4 +17,10 @@ phonesRouter
   .patch(phoneControllers.updatePhone)
   .delete(phoneControllers.deletePhone);
 
+phonesRouter.patch(
+  '/:id/images',
+  upload.uploadPhoto,
+  phoneControllers.updatePhoneImage
+);
+
 module.exports = phonesRouter;
