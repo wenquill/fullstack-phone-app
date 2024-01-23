@@ -13,10 +13,7 @@ export const getPhonesThunk = createAsyncThunk(
   `${PHONES_SLICE_NAME}/get`,
   async (payload, { rejectWithValue }) => {
     try {
-      const {
-        data: { data },
-      } = await API.getPhones();
-
+      const { data } = await API.getPhones();
       return data;
     } catch (err) {
       return rejectWithValue({ errors: err.response.data });
@@ -35,8 +32,8 @@ const phonesSlice = createSlice({
     });
 
     builder.addCase(getPhonesThunk.fulfilled, (state, { payload }) => {
-      state.isFetching = false;
       state.phones = payload;
+      state.isFetching = false;
     });
 
     builder.addCase(getPhonesThunk.rejected, (state, { payload }) => {
