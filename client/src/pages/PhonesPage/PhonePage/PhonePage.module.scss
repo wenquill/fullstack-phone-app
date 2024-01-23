@@ -1,0 +1,39 @@
+.imageContainer {
+  max-width: 500px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstItem {
+  flex: 1;
+  text-align: center;
+}
+
+.secondItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+  justify-content: center;
+  margin: 15px 0;
+}
