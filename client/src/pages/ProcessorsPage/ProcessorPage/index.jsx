@@ -14,7 +14,7 @@ function ProcessorPage ({ processors, isFetching, error, getProcessor }) {
   return (
     <article>
       <BeatLoader loading={isFetching} />
-      {error & <div>ERROR</div>}
+      {error && <div>ERROR</div>}
       <h2>Processor {processors?.name}</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam

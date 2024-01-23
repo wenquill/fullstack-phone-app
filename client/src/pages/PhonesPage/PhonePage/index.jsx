@@ -14,10 +14,10 @@ function PhonePage ({ phones, isFetching, error, getPhone }) {
   return (
     <article>
       <BeatLoader loading={isFetching} />
-      {error & <div>ERROR</div>}
+      {error && <div>ERROR</div>}
       {phones && (
         <div>
-          Phone {phones.brand} {phones.model}
+          Phone {phones.id} {phones.brand} {phones.model}
         </div>
       )}
     </article>

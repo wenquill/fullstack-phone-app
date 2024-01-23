@@ -4,6 +4,7 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import { connect } from 'react-redux';
 import ProcessorCard from './ProcessorCard';
 import { getProcessorsThunk } from '../../store/slices/processorsSlice';
+import styles from './ProcessorsList.module.scss'
 
 function ProcessorsList ({ processors, isFetching, error, getProcessors }) {
   useEffect(() => {
@@ -14,11 +15,11 @@ function ProcessorsList ({ processors, isFetching, error, getProcessors }) {
     <div>
       <BeatLoader loading={isFetching} />
       {error && <div>error</div>}
-      <h2>Processors List</h2>
-      <ul>
+      <h1 className={styles.title}>Processors List</h1>
+      <ul className={styles.list}>
         {Array.isArray(processors) ? (
           processors.map(processor => (
-            <li key={processor.id}>
+            <li key={processor.id} className={styles.card}>
               <ProcessorCard processor={processor} />
             </li>
           ))

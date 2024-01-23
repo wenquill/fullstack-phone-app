@@ -1,12 +1,7 @@
-import ProcessorsList from "../../components/ProcessorsList"
+import ProcessorsList from '../../components/ProcessorsList';
 
-function ProcessorsPage() {
-  return (
-    <div>
-      <h1>ProcessorsPage</h1>
-      <ProcessorsList/>
-    </div>
-  )
+function ProcessorsPage () {
+  return <ProcessorsList />;
 }
 
-export default ProcessorsPage
+export default ProcessorsPage;

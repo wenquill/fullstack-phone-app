@@ -19,20 +19,15 @@
 }
 
 .imageContainer {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
