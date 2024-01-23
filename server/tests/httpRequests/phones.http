@@ -69,7 +69,7 @@ Content-Type: application/json
 
 ### видалення телефону з id: 2
 
-DELETE http://localhost:5000/api/phones/2
+DELETE http://localhost:5000/api/phones/35
 
 ### видалення телефонів 2016 року випуску
 

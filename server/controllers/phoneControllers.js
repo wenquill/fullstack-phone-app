@@ -12,8 +12,6 @@ module.exports.createPhone = async (req, res, next) => {
     }
 
     const createdPhone = await Phone.create(body);
-    console.log('created phone: ', createdPhone);
-
     if (!createdPhone) {
       return next(createHttpError(404, 'Something went wrong...'));
     }
@@ -118,7 +116,13 @@ module.exports.getPhone = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const foundPhone = await Phone.findByPk(id);
+    const foundPhone = await Phone.findByPk(id, {
+      include: {
+        model: Processor,
+        attributes: ['name'],
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
 
     if (!foundPhone) {
       return next(createHttpError(404, 'Phone not found ):'));
