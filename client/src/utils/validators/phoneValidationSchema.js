@@ -8,4 +8,5 @@ export const PHONE_VALIDATION_SCHEMA = yup.object({
   screenDiagonal: yup.number().moreThan(0),
   hasNfc: yup.boolean(),
   phonePhoto: yup.mixed(),
+  processorId: yup.number().required(),
 });

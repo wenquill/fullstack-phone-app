@@ -9,6 +9,18 @@ const initialState = {
   error: null,
 };
 
+export const createPhoneThunk = createAsyncThunk(
+  `${PHONES_SLICE_NAME}/post`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.createPhone(payload);
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 export const getPhonesThunk = createAsyncThunk(
   `${PHONES_SLICE_NAME}/get`,
   async (payload, { rejectWithValue }) => {
@@ -65,6 +77,22 @@ const phonesSlice = createSlice({
     });
 
     builder.addCase(getPhoneByIdThunk.rejected, (state, { payload }) => {
+      state.isFetching = false;
+      state.error = payload.errors;
+    });
+
+    // post phone
+    builder.addCase(createPhoneThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(createPhoneThunk.fulfilled, (state, { payload }) => {
+      state.phones.push(payload);
+      state.isFetching = false;
+    });
+
+    builder.addCase(createPhoneThunk.rejected, (state, { payload }) => {
       state.isFetching = false;
       state.error = payload.errors;
     });

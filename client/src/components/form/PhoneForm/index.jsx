@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { PHONE_VALIDATION_SCHEMA } from '../../../utils/validators/phoneValidationSchema';
 import FormInput from '../FormInput';
 import styles from './PhoneForm.module.scss';
+import { createPhoneThunk } from '../../../store/slices/phonesSlice';
 
 function PhoneForm ({ createPhone }) {
   const initialValues = {
@@ -12,7 +13,8 @@ function PhoneForm ({ createPhone }) {
     ramSize: '',
     screenDiagonal: '',
     hasNfc: false,
-    // phonePhoto: '',
+    processorId: '',
+    phonePhoto: '',
   };
 
   const handleSubmit = (values, formikBag) => {
@@ -20,10 +22,24 @@ function PhoneForm ({ createPhone }) {
 
     formData.append('brand', values.brand);
     formData.append('model', values.model);
-    formData.append('manufacturedYear', values.manufacturedYear);
-    formData.append('ramSize', values.ramSize);
-    formData.append('screenDiagonal', values.screenDiagonal);
-    formData.append('hasNfc', values.hasNfc);
+
+    if (values.manufacturedYear) {
+      formData.append('manufacturedYear', values.manufacturedYear);
+    }
+
+    if (values.ramSize) {
+      formData.append('ramSize', values.ramSize);
+    }
+
+    if (values.screenDiagonal) {
+      formData.append('screenDiagonal', values.screenDiagonal);
+    }
+
+    if (values.hasNfc) {
+      formData.append('hasNfc', values.hasNfc);
+    }
+
+    formData.append('processorId', values.processorId);
     formData.append('phonePhoto', values.phonePhoto);
 
     createPhone(formData);
@@ -88,6 +104,13 @@ function PhoneForm ({ createPhone }) {
             </div>
 
             <div className={styles.row}>
+              <FormInput
+                label='processor id:'
+                type='number'
+                name='processorId'
+                placeholder='enter a processor id'
+                classes={classes}
+              />
               <label className={styles.column}>
                 <span>photo:</span>
                 <input
@@ -101,6 +124,20 @@ function PhoneForm ({ createPhone }) {
                 />
               </label>
             </div>
+
+            <label className={styles.column}>
+              <p>has NFC?</p>
+              <div>
+                <Field type='radio' name='hasNfc' value='true' />
+                <span> yes</span>
+              </div>
+              <div>
+                <Field type='radio' name='hasNfc' value='false' />
+                <span> no</span>
+              </div>
+              <ErrorMessage name='hasNfc' />
+            </label>
+
             <label className={styles.column}>
               <button type='submit'>Save</button>
             </label>
@@ -112,7 +149,7 @@ function PhoneForm ({ createPhone }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createPhone: data => dispatch(),
+  createPhone: data => dispatch(createPhoneThunk(data)),
 });
 
 export default connect(null, mapDispatchToProps)(PhoneForm);

@@ -20,11 +20,13 @@ function PhoneCard ({ phone }) {
         </div>
         <h2>{`${brand} ${model}`}</h2>
         <p>
-          <strong>Screen diagonal</strong>: {screenDiagonal}
+          <strong>Screen diagonal</strong>:{' '}
+          {screenDiagonal ? screenDiagonal : 'no information'}
         </p>
       </Link>
       <Link to={`/processors/${processorId}`}>
-        <strong>Processor</strong>: {Processor.name}
+        <strong>Processor</strong>:{' '}
+        {Processor?.name ? Processor?.name : 'no information'}
       </Link>
     </article>
   );
