@@ -1,20 +1,31 @@
 import { useEffect } from 'react';
+import BeatLoader from 'react-spinners/BeatLoader';
+import { connect } from 'react-redux';
+import { getPhonesThunk } from '../../store/slices/phonesSlice';
 
-function PhonesList () {
+function PhonesList ({ phones, isFetching, error, getPhones }) {
   useEffect(() => {
-    fetch('http://localhost:5000/api/phones')
-      .then(res => res.json())
-      .then(data => {});
+    getPhones();
   }, []);
 
   return (
     <div>
+      <BeatLoader loading={isFetching} />
+      {error && <div>error</div>}
       <h2>Phones List</h2>
-      <ul>
-        <li></li>
-      </ul>
+      {/* <ul>
+        {phones.map(phone => (
+          <li key={phone.id}>{phone.brand}</li>
+        ))}
+      </ul> */}
     </div>
   );
 }
 
-export default PhonesList;
+const mapStateToProps = ({ phonesData }) => phonesData;
+
+const mapDispatchToProps = dispatch => ({
+  getPhones: () => dispatch(getPhonesThunk()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhonesList);

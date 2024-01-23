@@ -1,8 +1,12 @@
 import React from 'react'
+import PhonesList from '../../components/PhonesList'
 
 function PhonesPage() {
   return (
-    <div>PhonesPage</div>
+    <div>
+      <h1>PhonesPage</h1>
+      <PhonesList/>
+    </div>
   )
 }
 
