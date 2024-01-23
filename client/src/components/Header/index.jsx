@@ -10,7 +10,7 @@ function Header () {
           <div className={styles.imageContainer}>
             <img src={logo} alt='logo' className={styles.logo} />
           </div>
-          <h1>Phones App</h1>
+          <h3>Phones App</h3>
         </div>
 
         <ul className={styles.linksList}>
