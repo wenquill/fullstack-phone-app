@@ -40,7 +40,7 @@ module.exports.getAllPhones = async (req, res, next) => {
         model: Processor,
         attributes: ['name'],
       },
-      attributes: { exclude: ['createdAt', 'updatedAt', 'processorId'] },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       ...pagination,
     });
 
