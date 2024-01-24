@@ -45,6 +45,18 @@ export const getPhoneByIdThunk = createAsyncThunk(
   }
 );
 
+export const deletePhoneByIdThunk = createAsyncThunk(
+  `${PHONES_SLICE_NAME}/delete/id`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      await API.deletePhoneById(payload);
+      return payload;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 const phonesSlice = createSlice({
   name: PHONES_SLICE_NAME,
   initialState,
@@ -93,6 +105,22 @@ const phonesSlice = createSlice({
     });
 
     builder.addCase(createPhoneThunk.rejected, (state, { payload }) => {
+      state.isFetching = false;
+      state.error = payload.errors;
+    });
+
+    // delete phone by id
+    builder.addCase(deletePhoneByIdThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(deletePhoneByIdThunk.fulfilled, (state, { payload }) => {
+      state.phones = state.phones.filter(p => p.id !== payload);
+      state.isFetching = false;
+    });
+
+    builder.addCase(deletePhoneByIdThunk.rejected, (state, { payload }) => {
       state.isFetching = false;
       state.error = payload.errors;
     });

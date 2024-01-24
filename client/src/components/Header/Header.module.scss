@@ -30,3 +30,11 @@
   height: auto;
   object-fit: cover;
 }
+
+.link {
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $main;
+  }
+}

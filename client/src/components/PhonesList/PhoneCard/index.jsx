@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import defaultPhoto from './default.jpg';
 import styles from './../PhonesList.module.scss';
 
-function PhoneCard ({ phone }) {
+function PhoneCard ({ phone, deletePhone }) {
   const { id, brand, model, screenDiagonal, Processor, processorId, image } =
     phone;
 
-  console.log(image);
-
   return (
-    <article>
+    <article className={styles.article}>
       <Link to={`/phones/${id}`} className={styles.info}>
         <div className={styles.imageContainer}>
           <img
@@ -28,6 +26,7 @@ function PhoneCard ({ phone }) {
         <strong>Processor</strong>:{' '}
         {Processor?.name ? Processor?.name : 'no information'}
       </Link>
+      <button className={styles.removeButton} onClick={() => deletePhone(id)}>Remove</button>
     </article>
   );
 }

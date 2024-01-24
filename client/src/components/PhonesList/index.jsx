@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { connect } from 'react-redux';
-import { getPhonesThunk } from '../../store/slices/phonesSlice';
+import { deletePhoneByIdThunk, getPhonesThunk } from '../../store/slices/phonesSlice';
 import PhoneCard from './PhoneCard';
 import styles from './PhonesList.module.scss';
 
-function PhonesList ({ phones, isFetching, error, getPhones }) {
+function PhonesList ({ phones, isFetching, error, getPhones, deletePhone }) {
   useEffect(() => {
     getPhones();
   }, []);
@@ -19,7 +19,7 @@ function PhonesList ({ phones, isFetching, error, getPhones }) {
         {Array.isArray(phones) &&
           phones.map(phone => (
             <li key={phone.id} className={styles.card}>
-              <PhoneCard phone={phone} />
+              <PhoneCard phone={phone} deletePhone={deletePhone} />
             </li>
           ))}
       </ul>
@@ -31,6 +31,7 @@ const mapStateToProps = ({ phonesData }) => phonesData;
 
 const mapDispatchToProps = dispatch => ({
   getPhones: () => dispatch(getPhonesThunk()),
+  deletePhone: id => dispatch(deletePhoneByIdThunk(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PhonesList);

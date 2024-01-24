@@ -15,16 +15,16 @@ function Header () {
 
         <ul className={styles.linksList}>
           <li>
-            <Link to='/'>Home</Link>
+            <Link className={styles.link} to='/'>Home</Link>
           </li>
           <li>
-            <Link to='/phones'>Phones</Link>
+            <Link className={styles.link} to='/phones'>Phones</Link>
           </li>
           <li>
-            <Link to='/processors'>Processors</Link>
+            <Link className={styles.link} to='/processors'>Processors</Link>
           </li>
           <li>
-            <Link to='/form'>Form</Link>
+            <Link className={styles.link} to='/form'>Form</Link>
           </li>
         </ul>
       </nav>
