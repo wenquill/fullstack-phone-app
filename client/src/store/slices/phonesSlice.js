@@ -57,6 +57,21 @@ export const deletePhoneByIdThunk = createAsyncThunk(
   }
 );
 
+export const updatePhoneByIdThunk = createAsyncThunk(
+  `${PHONES_SLICE_NAME}/patch/id`,
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { data } = await API.updatePhoneById({
+        id: payload.id,
+        data: payload.data,
+      });
+      return data;
+    } catch (err) {
+      return rejectWithValue({ errors: err.response.data });
+    }
+  }
+);
+
 const phonesSlice = createSlice({
   name: PHONES_SLICE_NAME,
   initialState,
@@ -121,6 +136,29 @@ const phonesSlice = createSlice({
     });
 
     builder.addCase(deletePhoneByIdThunk.rejected, (state, { payload }) => {
+      state.isFetching = false;
+      state.error = payload.errors;
+    });
+
+    // patch phone by id
+    builder.addCase(updatePhoneByIdThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+
+    builder.addCase(
+      updatePhoneByIdThunk.fulfilled,
+      (state, { payload: { id, data } }) => {
+        const updatedPhoneIndex = state.phones.findIndex(p => p.id === id);
+        state.phones[updatedPhoneIndex] = {
+          ...state.phones[updatedPhoneIndex],
+          ...data,
+        };
+        state.isFetching = false;
+      }
+    );
+
+    builder.addCase(updatePhoneByIdThunk.rejected, (state, { payload }) => {
       state.isFetching = false;
       state.error = payload.errors;
     });
