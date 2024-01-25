@@ -150,10 +150,11 @@ const phonesSlice = createSlice({
       updatePhoneByIdThunk.fulfilled,
       (state, { payload: { id, data } }) => {
         const updatedPhoneIndex = state.phones.findIndex(p => p.id === id);
-        state.phones[updatedPhoneIndex] = {
+        const updPhone = state.phones[updatedPhoneIndex] = {
           ...state.phones[updatedPhoneIndex],
           ...data,
         };
+        
         state.isFetching = false;
       }
     );

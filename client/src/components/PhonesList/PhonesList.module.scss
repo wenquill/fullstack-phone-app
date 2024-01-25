@@ -63,7 +63,6 @@
   }
 }
 
-
 .checkbox {
   appearance: none;
   -webkit-appearance: none;
@@ -74,12 +73,13 @@
   border-radius: 50%;
   border: 1.5px solid #fff;
   flex: 0 0 auto;
+  cursor: pointer;
 
   position: relative;
 
   &:checked {
     border-color: transparent;
-    background-color: rgb(214, 153, 153);
+    background-color: $main;
   }
 
   &:checked:before {
